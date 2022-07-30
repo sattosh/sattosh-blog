@@ -10,9 +10,24 @@
 }
 
 .markdown h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
+  @apply text-3xl mt-12 mb-4 leading-snug font-bold;
 }
 
 .markdown h3 {
   @apply text-2xl mt-8 mb-4 leading-snug;
+}
+
+
+.markdown ul {
+  @apply pl-8;
+  list-style-type: disc;
+
+}
+
+.markdown li {
+  @apply pl-2 pb-1;
+}
+
+.markdown img {
+  @apply border-gray-100 border
 }
