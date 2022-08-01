@@ -9,20 +9,36 @@
   @apply my-6;
 }
 
+.markdown h1 {
+  @apply text-6xl mt-12 mb-4 leading-snug font-bold
+}
+
 .markdown h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug font-bold;
+  @apply text-4xl mt-12 mb-4 leading-snug font-bold;
 }
 
 .markdown h3 {
   @apply text-2xl mt-8 mb-4 leading-snug;
 }
 
-
 .markdown ul {
   @apply pl-8;
   list-style-type: disc;
-
 }
+
+.markdown p code {
+  @apply bg-gray-200 text-gray-700 tracking-wide
+}
+
+.markdown blockquote {
+  @apply relative my-0 pl-5 border-l-gray-300 border-solid  border-l-[5px] rounded-sm text-xl
+}
+
+.markdown blockquote p {
+  @apply py-2
+}
+
+
 
 .markdown li {
   @apply pl-2 pb-1;

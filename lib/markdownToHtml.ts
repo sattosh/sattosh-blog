@@ -1,14 +1,14 @@
 import { remark } from 'remark';
 import html from 'remark-html';
-import parse from 'remark-parse';
-import stringify from 'remark-stringify';
 import prism from 'remark-prism';
+import slug from 'remark-slug';
+import toc from 'remark-toc';
 
 export default async function markdownToHtml(markdown: string) {
   const result = await remark()
-    .use(parse)
-    .use(stringify)
-    .use(prism, { plugins: ['line-numbers'] })
+    .use(slug)
+    .use(toc, { heading: '目次', maxDepth: 2 })
+    .use(prism)
     .use(html, { sanitize: false })
     .process(markdown);
   return result.toString();
