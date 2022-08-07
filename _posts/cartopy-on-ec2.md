@@ -12,6 +12,7 @@ ogImage:
 
 # Cartopy on EC2
 
+
 地理空間データ分析で使われるCartopy。ただ、こいつ自身の内部で使われている共有ライブラリーの依存関係を修正するのが大変なので、AWSサービスの一つであるEC2でAmazonLinux2を使ってCartopyが無事動くまでを書いていきます。
 
 また、今回はAnaconda(miniconda)を使わずにpipでのインストールをしていきます。
