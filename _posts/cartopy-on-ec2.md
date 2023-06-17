@@ -4,7 +4,7 @@ excerpt: 'とにかく依存関係の辛い、地理空間データ分析で使�
 coverImage: '/assets/blog/cartopy-on-ec2/cartopy-on-ec2.webp'
 date: '2022-08-01T15:00:07.322Z'
 author:
-  name: satokin
+  name: sattosh
   picture: '/assets/blog/authors/jj.jpeg'
 ogImage:
   url: '/assets/blog/cartopy-on-ec2/cartopy-on-ec2.webp'

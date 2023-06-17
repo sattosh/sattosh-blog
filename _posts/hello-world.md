@@ -4,7 +4,7 @@ excerpt: '急に思い立ってブログサイトをたちあげました。理�
 coverImage: '/assets/blog/hello-world/cf-logo-v.svg'
 date: '2022-07-30T05:35:07.322Z'
 author:
-  name: satokin
+  name: sattosh
   picture: '/assets/blog/authors/jj.jpeg'
 ogImage:
   url: '/assets/blog/hello-world/cf-logo-v-rgb.png'

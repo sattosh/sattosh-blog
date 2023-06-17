@@ -1,8 +1,9 @@
 import fs from 'fs';
-import { join } from 'path';
+import { resolve } from 'path';
 import matter from 'gray-matter';
+import PostType from '../interfaces/post';
 
-const postsDirectory = join(process.cwd(), '_posts');
+const postsDirectory = resolve(process.cwd(), '_posts');
 
 /** 記事用マークダウンファイルのファイル名を全取得 */
 export function getPostSlugs() {
@@ -11,15 +12,13 @@ export function getPostSlugs() {
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
   const realSlug = slug.replace(/\.md$/, '');
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
+  console.log(postsDirectory);
+  console.log('test');
+  const fullPath = resolve(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  type Items = {
-    [key: string]: string;
-  };
-
-  const items: Items = {};
+  const items = {};
 
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
@@ -35,7 +34,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     }
   });
 
-  return items;
+  return items as PostType;
 }
 
 export function getAllPosts(fields: string[] = []) {
