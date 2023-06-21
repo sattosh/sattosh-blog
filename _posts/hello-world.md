@@ -7,7 +7,10 @@ author:
   name: sattosh
   picture: '/assets/blog/authors/jj.jpeg'
 ogImage:
-  url: '/assets/blog/hello-world/cf-logo-v-rgb.png'
+  url: '/assets/blog/hello-world/cf-logo-v-rgb.webp'
+tags:
+  - cloudflare
+  - nextjs
 ---
 
 ## きっかけ

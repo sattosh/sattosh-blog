@@ -16,10 +16,12 @@ type Props = {
 
 export const PostPreview = ({ title, coverImage, date, excerpt, author, slug }: Props) => {
   const router = useRouter();
+  // 画面遷移のためのクリックイベント
   const handleClick = (e) => {
     e.preventDefault();
     router.push(`/posts/${slug}`);
   };
+
   return (
     <div
       className="sm:shadow-sm sm:shadow-slate-200 p-6 rounded-sm hover:shadow-slate-500 duration-500 hover:cursor-pointer"
