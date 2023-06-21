@@ -1,8 +1,10 @@
-const Intro = () => {
+export const Intro = () => {
   return (
-    <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
-      <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">{`Sattosh Blog`}</h1>
-      <h4 className="text-center md:text-left text-lg mt-5 md:pl-8">趣味が写真な気まぐれエンジニアブログ。</h4>
+    <section className="flex-col md:flex-row flex items-center md:justify-between mt-6 mb-6 ms:mb-0">
+      <div className="flex justify-between items-center w-full">
+        <div className="text-5xl md:text-8xl font-bold tracking-tighter leading-tight">Sattosh Blog</div>
+        <div className="md:text-lg md:pl-8">趣味が写真な気まぐれエンジニアブログ</div>
+      </div>
     </section>
   );
 };

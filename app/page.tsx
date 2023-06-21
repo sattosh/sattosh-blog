@@ -1,20 +1,15 @@
-import { GetStaticProps } from 'next';
 import cn from 'classnames';
 import Container from '../components/container';
 import MoreStories from '../components/more-stories';
 import Intro from '../components/intro';
 import Layout from '../components/layout';
-import { getAllPosts } from '../lib/api';
-import Head from 'next/head';
+import { getAllPosts } from '../lib/mdn2html/api';
 
 export default function Index() {
   const allPosts = getAllPosts(['title', 'date', 'slug', 'author', 'coverImage', 'excerpt']);
   return (
     <>
       <Layout>
-        <Head>
-          <title>Sattosh Blog</title>
-        </Head>
         <Container>
           <Intro />
           <img

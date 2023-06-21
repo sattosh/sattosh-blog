@@ -8,6 +8,10 @@ author:
   picture: '/assets/blog/authors/jj.jpeg'
 ogImage:
   url: '/assets/blog/cartopy-on-ec2/cartopy-on-ec2.webp'
+tags:
+  - aws
+  - python
+  - gis
 ---
 
 # Cartopy on EC2

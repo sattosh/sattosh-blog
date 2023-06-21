@@ -1,15 +1,11 @@
-import { useRouter } from 'next/navigation';
-import ErrorPage from 'next/error';
-import Container from '../../../components/container';
-import PostBody from '../../../components/post-body';
-import Header from '../../../components/header';
-import PostHeader from '../../../components/post-header';
-import Layout from '../../../components/layout';
-import { getPostBySlug, getAllPosts } from '../../../lib/api';
-import PostTitle from '../../../components/post-title';
 import Head from 'next/head';
-import markdownToHtml from '../../../lib/markdownToHtml';
-import type PostType from '../../../interfaces/post';
+import Container from '@/components/container';
+import PostBody from '@/components/post/body';
+import Header from '@/components/header';
+import { PostHeader, PostTitle } from '@/components/post';
+import Layout from '@/components/layout';
+import { getPostBySlug, getAllPosts } from '@/lib/mdn2html/api';
+import { markdownToHtml } from '@/lib/mdn2html';
 
 type Props = {
   params: { slug: string };
@@ -17,14 +13,14 @@ type Props = {
 
 export default function Post({ params }: Props) {
   const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'author', 'content', 'ogImage', 'coverImage']);
-  const content = markdownToHtml(post.content || '');
+  const content = markdownToHtml(post?.content || '');
 
   return (
     <Layout>
       <Container>
         <Header />
-        {false ? (
-          <PostTitle>Loading…</PostTitle>
+        {!post ? (
+          <PostTitle>Load Content Failed</PostTitle>
         ) : (
           <>
             <article className="mb-32">
@@ -41,12 +37,6 @@ export default function Post({ params }: Props) {
     </Layout>
   );
 }
-
-type Params = {
-  params: {
-    slug: string;
-  };
-};
 
 export async function generateStaticParams() {
   const posts = getAllPosts(['slug']);
