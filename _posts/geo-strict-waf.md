@@ -149,7 +149,7 @@ export class SandboxApigatewayWafStack extends cdk.Stack {
 
 海外からのIPのアクセスとしてEC2を別リージョンに立ててcurlなどでアクセスしてもよかったのですが、今回は[www.webpagetest.org](https://www.webpagetest.org/)というサービスを使用してUSからアクセスさせてみました。
 
-### ↓実際のアクセス結果です。/worldだけ他の国からのアクセスをBlockしています
+↓実際のアクセス結果です。/worldだけ他の国からのアクセスをBlockしています
 ![error](/assets/blog/geo-strict-waf/result.webp)
 
 
