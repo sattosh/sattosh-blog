@@ -28,10 +28,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.excerpt,
     openGraph: {
       type: 'article',
-      images: [post.ogImage],
+      images: [post.ogImage.url],
       title: post.title,
       description: post.excerpt,
-      url: `https://https://blog.sattosh.com//posts/${post.slug}`,
+      url: `https://blog.sattosh.com//posts/${post.slug}`,
     },
   };
 }
