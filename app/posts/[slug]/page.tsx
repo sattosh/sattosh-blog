@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import { Metadata } from 'next';
 import Container from '@/components/container';
 import PostBody from '@/components/post/body';
 import Header from '@/components/header';
@@ -11,8 +11,33 @@ type Props = {
   params: { slug: string };
 };
 
+export async function generateStaticParams() {
+  const posts = getAllPosts(['slug']);
+  return posts.map((post) => {
+    return {
+      slug: post.slug,
+    };
+  });
+}
+
+/** メタデータの設定 */
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'author', 'content', 'ogImage', 'coverImage', 'excerpt']);
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      type: 'article',
+      images: [post.ogImage],
+      title: post.title,
+      description: post.excerpt,
+      url: `https://https://blog.sattosh.com//posts/${post.slug}`,
+    },
+  };
+}
+
 export default function Post({ params }: Props) {
-  const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'author', 'content', 'ogImage', 'coverImage']);
+  const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'author', 'content', 'ogImage', 'coverImage', 'excerpt']);
   const content = markdownToHtml(post?.content || '');
 
   return (
@@ -24,10 +49,6 @@ export default function Post({ params }: Props) {
         ) : (
           <>
             <article className="mb-32">
-              <Head>
-                <title>{post.title}</title>
-                <meta property="og:image" content={post.ogImage.url} />
-              </Head>
               <PostHeader title={post.title} coverImage={post.coverImage} date={post.date} author={post.author} />
               <PostBody content={content} />
             </article>
@@ -36,13 +57,4 @@ export default function Post({ params }: Props) {
       </Container>
     </Layout>
   );
-}
-
-export async function generateStaticParams() {
-  const posts = getAllPosts(['slug']);
-  return posts.map((post) => {
-    return {
-      slug: post.slug,
-    };
-  });
 }
