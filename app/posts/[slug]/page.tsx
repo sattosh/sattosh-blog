@@ -32,6 +32,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
       url: `https://blog.sattosh.com//posts/${post.slug}`,
+      siteName: 'Sattosh Blog',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: [post.ogImage.url],
+      description: post.excerpt,
+      title: post.title,
+      site: '@satokin_1754',
     },
   };
 }
