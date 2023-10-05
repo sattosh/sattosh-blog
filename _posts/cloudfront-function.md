@@ -13,18 +13,18 @@ ogImage:
 
 ## 初めに
 
-オンプレ時代で手っ取り早い認証といえばBasic認証である/(Apache懐かしい)
+オンプレ時代で手っ取り早い認証といえばBasic認証である.(Apache懐かしい)
 開発の補助機能をホスティングするときにAWSだとAWS Cognitoなどの外部認証機があるがわざわざリソースを別途立てるほどでもないなと思い、試しにAmazon Cloudfrontの機能の一つであるCloudfront FunctionsでBasic認証が実現できるか試してみました.(ホスティングはCloudfront+S3)
 
 ## Cloudfront Functions
 
 Cloudfront FunctionsはJavaScriptで軽量な関数を記述し、レイテンシーの影響を受けやすいCloudFrontを通過するリクエストとレスポンスの操作、基本認証と承認の実行、エッジでの HTTP レスポンスの生成などをを大規模に実行できます.
-ただし、軽量なJavaScriptのRuntime環境であるためECMAScript5.1に準拠されており(v6~9の一部の機能をサポート)、`const`や`Buffer`などの予約語が使えないので注意です。
+ただし、軽量なJavaScriptのRuntime環境であるためECMAScript5.1に準拠されており(v6~9の一部の機能をサポート)、`const`や`Buffer`などの予約語が使えないので注意です.
 
 
 ### 実際にコード
 
-今回はBasic認証ということで[ViewerRequest](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/lambda-cloudfront-trigger-events.html)のタイミングで発火し、認証情報のチェックを行う関数を買いていきます。
+今回はBasic認証ということで[ViewerRequest](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/lambda-cloudfront-trigger-events.html)のタイミングで発火し、認証情報のチェックを行う関数を買いていきます.
 
 ```js:basic_authentication_handler.js
 // Basic認証cloudfront function
@@ -55,7 +55,7 @@ function handler(event) {
 
 ## AWS CDK
 
-関数ができたところで実際にAWSにリソースをデプロイするAWS CDKのスクリプトは以下のようになります。
+関数ができたところで実際にAWSにリソースをデプロイするAWS CDKのスクリプトは以下のようになります.
 
 
 ```ts:dev-tool-viewer-stack.ts
@@ -88,12 +88,12 @@ export class DevToolViewerStack extends Construct {
     });
 
     /**  保存バケット設定 */
-    this.bucket = new s3.Bucket(this, 'Bucket', {
+    const bucket = new s3.Bucket(this, 'Bucket', {
       bucketName: `dev-tool-viewer`,
       removalPolicy: RemovalPolicy.DESTROY,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
     });
-    const defaultOrigin = new origins.S3Origin(this.bucket);
+    const defaultOrigin = new origins.S3Origin(bucket);
 
     // Origin Access Identity
     const oai = new cloudfront.OriginAccessIdentity(this, 'OAI', {
@@ -105,14 +105,14 @@ export class DevToolViewerStack extends Construct {
       actions: ['s3:GetObject'],
       effect: iam.Effect.ALLOW,
       principals: [new iam.CanonicalUserPrincipal(oai.cloudFrontOriginAccessIdentityS3CanonicalUserId)],
-      resources: [`${this.bucket.bucketArn}/*`],
+      resources: [`${bucket.bucketArn}/*`],
     });
 
     // 4. Bucket PolicyをS3 Bucketに適用
-    this.bucket.addToResourcePolicy(webSiteBucketPolicyStatement);
+    bucket.addToResourcePolicy(webSiteBucketPolicyStatement);
 
     // cloudfront設定
-    this.cloudfront = new cloudfront.Distribution(this, 'Distribution', {
+    const distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultBehavior: {
         origin: defaultOrigin,
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
