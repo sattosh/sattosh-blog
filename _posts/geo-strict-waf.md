@@ -1,6 +1,6 @@
 ---
 title: 'AWS WAFv2を使って国単位でアクセス許可をする方法'
-excerpt: 'AWS WAFv2を使って特定のAPI Gatewayへのアクセスを国ごとで許可をする。まあ、特定のPathだけはどこからもアクセスできるようにする方法をAWS CDKで記載。'
+excerpt: 'AWS WAFv2を使って特定のAPI Gatewayへのアクセスを国ごとで許可をする.まあ,特定のPathだけはどこからもアクセスできるようにする方法をAWS CDKで記載.'
 coverImage: '/assets/blog/geo-strict-waf/cover.webp'
 date: '2023-10-02T11:18:24.000+09:00'
 author:
@@ -13,18 +13,18 @@ ogImage:
 
 ## やりたいこと
 
-ある要件でフロントで使っているAPIを日本以外のアクセスを禁止する必要がありました。
-しかし、使用しているAPI Gatewayは外部のサービスからもアクセスを受けるものであり、外部サービスは国内外で冗長化されているのである程度絞ったとしてもどこの国かを制限することに対してリスクがありました。
+ある要件でフロントで使っているAPIを日本以外のアクセスを禁止する必要がありました.
+しかし,使用しているAPI Gatewayは外部のサービスからもアクセスを受けるものであり,外部サービスは国内外で冗長化されているのである程度絞ったとしてもどこの国かを制限することに対してリスクがありました.
 
 
 ## 対応
 
-AWS WAF自体はAPI Gateway全体につける仕様であり、上記の条件を満たすためには以下の二つのうちどれかです。
+AWS WAF自体はAPI Gateway全体につける仕様であり,上記の条件を満たすためには以下の二つのうちどれかです.
 
-1. エンドポイントを分ける(API Gatewayをもう一つ作成)して、片方だけにWAFをかける
+1. エンドポイントを分ける(API Gatewayをもう一つ作成)して,片方だけにWAFをかける
 2. 特定のPathだけ国別のアクセス許可をしないようにする
 
-今回は2を採用して対応しました。
+今回は2を採用して対応しました.
 
 
 ## 結果
@@ -142,14 +142,14 @@ export class SandboxApigatewayWafStack extends cdk.Stack {
 
 `日本以外のアクセス` かつ `/hello以外のPath` をBlockする
 
-ようにしています。
+ようにしています.
 
 
 ### 実際のWAFの挙動
 
-海外からのIPのアクセスとしてEC2を別リージョンに立ててcurlなどでアクセスしてもよかったのですが、今回は[www.webpagetest.org](https://www.webpagetest.org/)というサービスを使用してUSからアクセスさせてみました。
+海外からのIPのアクセスとしてEC2を別リージョンに立ててcurlなどでアクセスしてもよかったのですが,今回は[www.webpagetest.org](https://www.webpagetest.org/)というサービスを使用してUSからアクセスさせてみました.
 
-↓実際のアクセス結果です。/worldだけ他の国からのアクセスをBlockしています
+↓実際のアクセス結果です./worldだけ他の国からのアクセスをBlockしています
 ![error](/assets/blog/geo-strict-waf/result.webp)
 
 
