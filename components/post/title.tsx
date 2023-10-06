@@ -5,11 +5,7 @@ type Props = {
 };
 
 export const PostTitle = ({ children }: Props) => {
-  return (
-    <h1 className="text-4xl md:text-4xl lg:text-7xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-left">
-      {children}
-    </h1>
-  );
+  return <div className="text-6xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-left">{children}</div>;
 };
 
 export default PostTitle;

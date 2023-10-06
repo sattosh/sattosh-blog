@@ -24,7 +24,7 @@ export const PostPreview = ({ title, coverImage, date, excerpt, author, slug }: 
 
   return (
     <div
-      className="sm:shadow-sm sm:shadow-slate-200 p-6 rounded-sm hover:shadow-slate-500 duration-500 hover:cursor-pointer min-h-34 flex flex-col"
+      className="shadow-sm shadow-slate-200 p-6 rounded-sm hover:shadow-slate-500 duration-500 hover:cursor-pointer min-h-34 flex flex-col"
       onClick={handleClick}
     >
       <div

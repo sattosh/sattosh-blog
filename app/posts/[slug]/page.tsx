@@ -25,12 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(params.slug, ['title', 'date', 'slug', 'author', 'content', 'ogImage', 'coverImage', 'excerpt']);
   return {
     metadataBase: new URL('https://blog.sattosh.com'),
-    title: post.title,
+    title: `Sattosh Blog - ${post?.title}`,
     description: post.excerpt,
     openGraph: {
       type: 'article',
       images: [post.ogImage.url],
-      title: post.title,
+      title: post?.title || 'Sattosh Blog',
       description: post.excerpt,
       url: `https://blog.sattosh.com//posts/${post.slug}`,
       siteName: 'Sattosh Blog',
