@@ -24,23 +24,27 @@ export const PostPreview = ({ title, coverImage, date, excerpt, author, slug }: 
 
   return (
     <div
-      className="sm:shadow-sm sm:shadow-slate-200 p-6 rounded-sm hover:shadow-slate-500 duration-500 hover:cursor-pointer"
+      className="sm:shadow-sm sm:shadow-slate-200 p-6 rounded-sm hover:shadow-slate-500 duration-500 hover:cursor-pointer min-h-34 flex flex-col"
       onClick={handleClick}
     >
       <div
         className="bg-contain bg-no-repeat bg-center h-[150px] w-full mb-3"
         style={{ backgroundImage: `url(${coverImage})` }}
       />
-      <h4 className="text-3xl mb-3 leading-snug">
-        <Link as={`/posts/${slug}`} href="/posts/[slug]" className="hover:underline">
+      <div className="text-2xl my-2 leading-snug font-bold">
+        <Link as={`/posts/${slug}`} href="/posts/[slug]">
           {title}
         </Link>
-      </h4>
-      <div className="text-lg mb-4">
+      </div>
+      <div className="text-sm mb-4">
         <DateFormatter dateString={date} />
       </div>
-      <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-      <Avatar name={author.name} picture={author.picture} />
+      <p className="text-md leading-relaxed mb-4 text-gray-600">{excerpt}</p>
+      <div className="flex-1 flex flex-col-reverse">
+        <div>
+          <Avatar name={author.name} picture={author.picture} />
+        </div>
+      </div>
     </div>
   );
 };

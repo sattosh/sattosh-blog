@@ -4,11 +4,11 @@ type Props = {
   picture: string;
 };
 
-const Avatar = ({ name, picture }: Props) => {
+const Avatar = ({ name }: Props) => {
   return (
     <div className="flex items-center">
-      <BsFillPencilFill />
-      <div className="ml-1 text-xl font-bold">{name}</div>
+      <BsFillPencilFill size={13} />
+      <div className="ml-1 text-sl font-semibold">{name}</div>
     </div>
   );
 };
